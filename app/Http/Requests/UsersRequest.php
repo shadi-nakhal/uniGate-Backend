@@ -31,16 +31,18 @@ class UsersRequest extends FormRequest
             'mobile' => 'required|phone:auto',
             'ext' => 'required|min:3|max:3',
             'image' => 'mimes:jpeg,png,jpg,gif,svg|max:5120',
+            'role' => 'required|min:4|max:30'
         ];
 
         $ValidatePut = [
             //
             'firstname' => 'min:3|max:25',
             'lastname' => 'min:3|max:25',
-            'email' => 'email',
+            'email' => 'unique:users,email',
             'mobile' => 'phone:auto',
             'ext' => 'min:3|max:3',
             'image' => 'mimes:jpeg,png,jpg,gif,svg|max:5120',
+            'role' => 'min:4|max:30'
         ];
 
         switch ($this->method()) {
@@ -60,6 +62,7 @@ class UsersRequest extends FormRequest
             'email.required' => 'Email is required!',
             'email.email' => 'Email is Invalid',
             'image.required' => 'Image is required!',
+            'mobile.phone' => 'phone is required',
         ];
     }
 }

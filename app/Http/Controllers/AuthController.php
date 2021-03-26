@@ -12,6 +12,7 @@ class AuthController extends Controller
     {
         $request->validated();
         $data = $request->all();
+
         if ($request->hasFile('image')) {
             $imageFilename = uniqid();
             $request->image->storeAs('images', $imageFilename, 'public');
@@ -20,7 +21,9 @@ class AuthController extends Controller
         }
         $user = new User();
         $user->image = $imageFilename;
+        $user->status = 1;
         $user->fill($data);
+        $user->assignRole($request->role);
         $user->save();
         return response()->json([
             'user' => $user
@@ -38,6 +41,16 @@ class AuthController extends Controller
     {
         auth()->logout();
         return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    protected function profile()
+    {
+        if (auth()->user()) {
+            return response()->json([
+                'user' => auth()->user()
+            ]);
+        }
+        return null;
     }
     protected function respondWithToken($token)
     {

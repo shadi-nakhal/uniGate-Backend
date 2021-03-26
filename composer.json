@@ -15,6 +15,7 @@
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
         "propaganistas/laravel-phone": "4.2.3",
+        "spatie/laravel-permission": "^4.0",
         "tymon/jwt-auth": "1.0.*"
     },
     "require-dev": {
