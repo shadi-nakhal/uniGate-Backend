@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\MaterialRequest;
+use App\Http\Resources\MaterialResource;
 use App\Material;
 
 
@@ -11,7 +12,9 @@ class MaterialController extends Controller
 {
     public function index()
     {
-        return Material::with('client', 'project', 'technician')->paginate(10);
+        // return Material::with('client', 'project', 'technician', 'tasks')->paginate(10);
+        //return MaterialResource::collection(Material::with('client', 'project', 'technician', 'tasks')->paginate(10));
+        return MaterialResource::collection(Material::paginate(10));
     }
 
     public function show($id)

@@ -23,8 +23,26 @@ class TaskResquest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
+        $ValidatePut = [
+
+            'test_name' => 'unique:tasks,test_name,NULL,sample_id,sample_id,' . request('sample_id'),
+
         ];
+        $ValidatePost = [
+
+            'test_name' => 'required|unique:tasks,test_name,NULL,sample_id,sample_id,' . request('sample_id'),
+            'sample_id' => 'required',
+            'sample_type' => 'required',
+
+
+
+        ];
+
+        switch ($this->method()) {
+            case 'POST':
+                return $ValidatePost;
+            case 'PUT':
+                return $ValidatePut;
+        }
     }
 }

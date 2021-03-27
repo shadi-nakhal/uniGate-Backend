@@ -11,7 +11,12 @@ class Task extends Model
         'sample_ref', 'status'
     ];
 
-    protected $casts = [
-        'status' => 'boolean',
-    ];
+    public function concrete()
+    {
+        return $this->belongsTo(Concrete::class, 'sample_type', 'type');
+    }
+    public function material()
+    {
+        return $this->belongsTo(Material::class, 'sample_type', 'type');
+    }
 }

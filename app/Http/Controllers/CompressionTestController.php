@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\CompressionTest;
 use App\Concrete;
 use App\Grade;
+use App\Http\Resources\CompressionTestResource;
 use Illuminate\Http\Request;
 
 class CompressionTestController extends Controller
 {
     public function index()
     {
-        //
-        return CompressionTest::get();
+        // return CompressionTest::with('sample', 'technician')->paginate(10);
+        return CompressionTestResource::collection(CompressionTest::paginate(10));
     }
 
     public function show($type, $id)
@@ -30,7 +31,6 @@ class CompressionTestController extends Controller
         $test = new CompressionTest();
         $test->sample_ref = $sample->ref;
         $test->client_ref = $sample->client_ref;
-        $test->date = $sample->date;
         $test->source = $sample->source;
         $test->status = 1;
         $test->cast_date = $sample->cast_date;
@@ -44,7 +44,7 @@ class CompressionTestController extends Controller
         $mpa = ($request->load / $area) * 1000;
         $test->mpa = $mpa;
         $test->mpa_per =  ($mpa * 100) / $gradenumber;
-        $test->density = ($request->weight / $volume) / 1000000;
+        $test->density = ($request->weight / $volume) * 1000000;
         $test->fill($data);
         $test->save();
         return response()->json($test);

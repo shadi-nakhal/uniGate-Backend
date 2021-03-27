@@ -13,12 +13,10 @@ class CreateSandTestTable extends Migration
      */
     public function up()
     {
-        Schema::create('sand_test', function (Blueprint $table) {
+        Schema::create('sand_tests', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
             $table->string('client_ref');
             $table->string('sample_ref');
-            $table->date('cast_date');
             $table->time('time');
             $table->string('source');
             $table->string('sand_reading');
@@ -42,6 +40,6 @@ class CreateSandTestTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sand_test');
+        Schema::dropIfExists('sand_tests');
     }
 }

@@ -30,7 +30,7 @@ class SandRequest extends FormRequest
             'sand_reading2' => 'required|numeric|between:8,20',
             'clay_reading' => 'required|numeric|between:8,20',
             'clay_reading2' => 'required|numeric|between:8,20',
-            'status' => 'required|boolean'
+
         ];
         $ValidatePost = [
 
@@ -39,7 +39,7 @@ class SandRequest extends FormRequest
             'sand_reading2' => 'required|numeric|between:8,20',
             'clay_reading' => 'required|numeric|between:8,20',
             'clay_reading2' => 'required|numeric|between:8,20',
-            'status' => 'required|boolean'
+
 
 
         ];

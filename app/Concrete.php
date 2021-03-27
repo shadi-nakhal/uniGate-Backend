@@ -29,8 +29,13 @@ class Concrete extends Model
         return $this->hasOne(User::class, 'id', 'technician_id');
     }
 
-    public function tests()
+    public function tasks()
     {
-        return $this->hasMany(User::class, 'sample_id', 'id');
+        return $this->hasMany(Task::class, 'sample_type', 'type')->where('sample_id', $this->id);
+    }
+
+    public function belongtotask()
+    {
+        return $this->belongsToMany(Task::class, 'sample_type', 'type')->where('sample_id', $this->id);
     }
 }

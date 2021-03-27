@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SandTestResource;
 use App\Material;
 use App\SandTest;
 use Illuminate\Http\Request;
@@ -10,8 +11,8 @@ class SandTestController extends Controller
 {
     public function index()
     {
-        //
-        return SandTest::get();
+        //return SandTest::with('sample', 'technician')->paginate(10);
+        return SandTestResource::collection(SandTest::paginate(10));
     }
 
     public function show($type, $id)
@@ -27,8 +28,8 @@ class SandTestController extends Controller
         $test = new SandTest();
         $test->sample_ref = $sample->ref;
         $test->client_ref = $sample->client_ref;
-        $test->date = $sample->date;
         $test->source = $sample->source;
+        $test->status = 1;
         $test_result = $request->clay_reading / $request->sand_reading;
         $test->test_result = $test_result;
         $test_result2 = $request->clay_reading2 / $request->sand_reading2;

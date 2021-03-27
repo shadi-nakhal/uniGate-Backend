@@ -26,27 +26,23 @@ class ConcreteRequest extends FormRequest
         $ValidatePut = [
             //
             'date' => 'date_format:Y-m-d|required',
-            // 'ref' => 'required|min:3|max:30|unique:concretes,ref',
             'type' => 'required|min:3|max:50',
             'type_description' => 'required|min:3|max:50',
             'age' => 'required|numeric|between:1,99',
             'cast_date' => 'date_format:Y-m-d|required',
-            // 'test_date' => 'date_format:Y-m-d|required',
             'source' => 'required',
             'grade' => 'required|min:3|max:30',
-            'client_ref' => 'required|min:3|max:30|unique:samples,client_ref',
+            'client_ref' => 'required|min:3|max:30|unique:concretes,client_ref',
             'ticket_number' => 'required|min:3|max:30',
             'truck_number' => 'required|min:3|max:30',
         ];
         $ValidatePost = [
             //
             'date' => 'date_format:Y-m-d|required',
-            // 'ref' => 'required|min:3|max:30|unique:concretes,ref',
             'type' => 'required|min:3|max:50',
             'type_description' => 'required|min:3|max:50',
             'age' => 'required|numeric|between:1,99',
             'cast_date' => 'date_format:Y-m-d|required',
-            // 'test_date' => 'date_format:Y-m-d|required',
             'source' => 'required',
             'grade' => 'required|min:1|max:30',
             'client_ref' => 'required|min:3|max:30|unique:concretes,client_ref',

@@ -7,19 +7,20 @@ use App\Http\Requests\ConcreteRequest;
 use DateTime;
 use DateInterval;
 use App\Concrete;
-
+use App\Http\Resources\ConcreteResource;
 
 class ConcreteController extends Controller
 {
     public function index()
     {
-        //
-        return Concrete::with('client', 'project', 'technician')->paginate(10);
+
+        //return Concrete::with('client', 'project', 'technician', 'tasks')->paginate(10);
+        // return ConcreteResource::collection(Concrete::with('client', 'project', 'technician')->paginate(10));
+        return ConcreteResource::collection(Concrete::paginate(10));
     }
 
     public function show($id)
     {
-        //
         return Concrete::where('id', $id)->first();
     }
 

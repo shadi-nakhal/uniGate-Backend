@@ -34,10 +34,19 @@ class SelectionController extends Controller
     public function testselection($type)
     {
         $users = User::role('Technician')->get();
-        $tests = Type::with('tests')->where('type', $type)->first();
+        $tests = Type::with('tests')->where('type', $type)->orwhere('belongs', $type)->first();
         return response()->json([
             'users' => $users,
             'tests' => $tests['tests']
+
+        ]);
+    }
+
+    public function testrecord()
+    {
+        $tests = TestsList::all();
+        return response()->json([
+            'tests' => $tests
 
         ]);
     }

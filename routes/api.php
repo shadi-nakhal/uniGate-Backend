@@ -20,17 +20,23 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
-Route::post('/register', 'AuthController@register');
-Route::post('/login', 'AuthController@login');
-Route::post('/logout', 'AuthController@logout');
 
-Route::group(['middleware' => ['jwt.verify']], function () {
-    Route::delete('/user/{id}', 'UsersController@destroy');
-});
+Route::post('/login', 'AuthController@login');
+
+
 
 Route::group(['middleware' => ['role:Head of lab']], function () {
     //checks for roles
 });
+Route::get('/selection', 'SelectionController@selection');
+Route::get('/testrecord', 'SelectionController@testrecord');
+Route::get('/addtestselection/{test}', 'SelectionController@addtestselection');
+Route::get('/testselection/{test}', 'SelectionController@testselection');
+Route::group(['middleware' => ['jwt.verify']], function () {
+});
+Route::delete('/user/{id}', 'UsersController@destroy');
+Route::post('/register', 'AuthController@register');
+Route::post('/logout', 'AuthController@logout');
 
 Route::put('/users/{id}', 'UsersController@update');
 Route::get('/user/{id}', 'UsersController@show');
@@ -50,9 +56,7 @@ Route::post('/project', 'ProjectController@store');
 Route::put('/project/{id}', 'ProjectController@update');
 Route::delete('/project/{id}', 'ProjectController@destroy');
 
-Route::get('/selection', 'SelectionController@selection');
-Route::get('/testselection/{test}', 'SelectionController@testselection');
-Route::get('/addtestselection/{test}', 'SelectionController@addtestselection');
+
 
 Route::get('/materials', 'MaterialController@index');
 Route::get('/materials/{id}', 'MaterialController@show');
@@ -102,13 +106,13 @@ Route::post('/fracture', 'FractureController@store');
 Route::put('/fracture/{id}', 'FractureController@update');
 Route::delete('/fracture/{id}', 'FractureController@destroy');
 
-Route::get('/compressives', 'CompressionTestController@index');
+Route::get('/compressive', 'CompressionTestController@index');
 Route::get('/compressive/{id}', 'CompressionTestController@show');
-Route::post('/compressive', 'CompressionTestController@store');
+Route::post('/csandsompressive', 'CompressionTestController@store');
 Route::put('/compressive/{id}', 'CompressionTestController@update');
 Route::delete('/compressive/{id}', 'CompressionTestController@destroy');
 
-Route::get('/sands', 'SandTestController@index');
+Route::get('/sand', 'SandTestController@index');
 Route::get('/sand/{id}', 'SandTestController@show');
 Route::post('/sand', 'SandTestController@store');
 Route::put('/sand/{id}', 'SandTestController@update');

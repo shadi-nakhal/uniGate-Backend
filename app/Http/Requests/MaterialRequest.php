@@ -35,7 +35,7 @@ class MaterialRequest extends FormRequest
             'truck_number' => 'required|min:3|max:30',
             'source' => 'required|min:3|max:30',
             'test_date' => 'date_format:Y-m-d|required',
-            'client_ref' => 'required|min:3|max:30|unique:samples,client_ref',
+            'client_ref' => 'required|min:3|max:30|unique:materials,client_ref',
         ];
         $ValidatePost = [
             //
@@ -47,7 +47,7 @@ class MaterialRequest extends FormRequest
             'truck_number' => 'required|min:3|max:30',
             'source' => 'required|min:3|max:30',
             'test_date' => 'date_format:Y-m-d|required',
-            'client_ref' => 'required|min:3|max:30|unique:samples,client_ref',
+            'client_ref' => 'required|min:3|max:30|unique:materials,client_ref',
         ];
 
         switch ($this->method()) {

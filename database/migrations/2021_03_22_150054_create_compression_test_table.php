@@ -13,9 +13,8 @@ class CreateCompressionTestTable extends Migration
      */
     public function up()
     {
-        Schema::create('compression_test', function (Blueprint $table) {
+        Schema::create('compression_tests', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
             $table->string('client_ref');
             $table->string('sample_ref');
             $table->date('cast_date');
@@ -46,6 +45,6 @@ class CreateCompressionTestTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('compression_test');
+        Schema::dropIfExists('compression_tests');
     }
 }
