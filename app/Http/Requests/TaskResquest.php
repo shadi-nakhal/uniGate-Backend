@@ -45,4 +45,11 @@ class TaskResquest extends FormRequest
                 return $ValidatePut;
         }
     }
+
+    public function messages()
+    {
+        return [
+            'test_name.unique' => 'This Test has already been assigned',
+        ];
+    }
 }

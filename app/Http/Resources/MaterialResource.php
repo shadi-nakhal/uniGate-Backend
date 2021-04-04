@@ -46,17 +46,6 @@ class MaterialResource extends JsonResource
             'status' => $status,
             'added_by' => $this->technician['firstname'] . " " . $this->technician['lastname'],
             'client_id' => $this->client['name'],
-            // 'test_date' => $this->sample['test_date'],
-            // 'sample_type' => $this->sample['type'],
-            // 'sample_description' => $this->sample['type_description'],
-            // 'test_name' => $this->sample->tasks->pluck('test_name')[0],
-            // 'client_ref' => $this->sample['client_ref'],
-            // 'client_id' => $this->sample['name'],
-            // 'source' => $this->sample['source'],
-            // 'truck_number' => $this->sample['truck_number'],
-            // 'ticket_number' => $this->sample['ticket_number'],
-            // 'ticket_number' => $this->sample['ticket_number'],
-            // 'date' => $this->sample['date'],
 
         ]);
     }

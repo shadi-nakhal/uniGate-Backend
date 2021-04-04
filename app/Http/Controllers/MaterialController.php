@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\MaterialRequest;
 use App\Http\Resources\MaterialResource;
 use App\Material;
-
+use App\Task;
 
 class MaterialController extends Controller
 {
@@ -51,7 +51,14 @@ class MaterialController extends Controller
 
     public function destroy($id)
     {
-        Material::where('id', $id)->delete();
-        return Material::with('client', 'project', 'technician')->paginate(10);
+        $tasks = Material::find($id)->tasks()->get();
+        if (count($tasks) == 0) {
+            Material::where('id', $id)->delete();
+            return MaterialResource::collection(Material::paginate(10));
+        } else {
+            return  response()->json([
+                'errors' => ['Cannot delete sample with assigned tasks']
+            ], 400);
+        }
     }
 }

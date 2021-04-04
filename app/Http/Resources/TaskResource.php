@@ -15,12 +15,10 @@ class TaskResource extends JsonResource
      */
     public function toArray($request)
     {
-        $testtdate = "";
-        if ($this->material !== null) {
-            $testtdate = $this->material['test_date'];
-        } else if ($this->concrete !== null) {
-            $testtdate = $this->concrete['test_date'];
-        }
+
+
+        $testtdate = $this->test_date;
+        $technician = $this->user['firstname'] . " " . $this->user['lastname'];
         $test_date = new DateTime($testtdate);
         $test2 = new DateTime($testtdate);
         $date = new DateTime(date('Y-m-d'));
@@ -38,12 +36,16 @@ class TaskResource extends JsonResource
                 $newstatus = "Pending";
             }
         }
+
         if ($status) {
             $newstatus = "Completed";
         }
         $original = parent::toArray($request);
         return array_merge($original, [
             'status' => $newstatus,
+            'technician_name' => $technician,
+            'today' => $today
+
 
         ]);
     }

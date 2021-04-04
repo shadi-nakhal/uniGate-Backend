@@ -7,19 +7,24 @@ use App\Http\Resources\TaskResource;
 use App\Task;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class TaskController extends Controller
 {
     public function index()
     {
-        //
-        // return Task::get();
-        return TaskResource::collection(Task::with('concrete')->with('material')->paginate(10));
+        if (auth()->user()->hasRole("Head of lab")) {
+            return TaskResource::collection(Task::paginate(10));
+        } else {
+            return TaskResource::collection(Task::where('technician_id', auth()->user()->id)->paginate(10));
+        }
     }
 
     public function show($type, $id)
     {
-        return Task::where('sample_id', $id)->where('sample_type', $type)->get();
+        // return Task::where('sample_id', $id)->where('sample_type', $type)->get();
+
+        return TaskResource::collection(Task::where('sample_id', $id)->where('sample_type', $type)->get());
     }
 
     public function store(TaskResquest $request)
@@ -29,8 +34,6 @@ class TaskController extends Controller
         $sample =
             $task = new Task();
         $task->fill($data);
-        $technician_name = User::where('id', $request->technician_id)->first();
-        $task->technician_name = $technician_name->firstname . " " . $technician_name->lastname;
         $task->save();
         return response()->json($task);
     }
@@ -48,8 +51,26 @@ class TaskController extends Controller
 
     public function destroy($id)
     {
-        Task::where('id', $id)->delete();
+        $target = Task::where('id', $id)->first();
         $task = Task::all();
-        return response()->json($task);
+        if (auth()->user()->hasRole("Head of lab")) {
+            Task::where('id', $id)->delete();
+
+            return response()->json($task);
+        } else if (auth()->user()->hasRole("Technician")) {
+            if ((int)$target['technician_id'] == (int)auth()->user()->id) {
+                Task::where('id', $id)->delete();
+                $task = Task::all();
+                return response()->json($task);
+            } else {
+                return  response()->json([
+                    'errors' => ['U n a u t h o r i z e d']
+                ], 403);
+            }
+        } else {
+            return  response()->json([
+                'errors' => ['U n a u t h o r i z e d']
+            ], 403);
+        }
     }
 }

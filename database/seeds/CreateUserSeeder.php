@@ -35,12 +35,12 @@ class CreateUserSeeder extends Seeder
             'email' => 'shadi@shadi.com',
             'mobile' => '+9613666555',
             'ext' => '666',
-            'role' => 'Qc manager',
+            'role' => 'Technician',
             'status' => 1,
             'image' => 'avatar',
             'password' => '123123'
         ]);
-        $user2->assignRole('Qc manager');
+        $user2->assignRole('Technician');
 
 
         $user3 = User::create([
@@ -49,12 +49,12 @@ class CreateUserSeeder extends Seeder
             'email' => 'sam@sam.com',
             'mobile' => '+9613666555',
             'ext' => '666',
-            'role' => 'Plant manager',
+            'role' => 'Technician',
             'status' => 1,
             'image' => 'avatar',
             'password' => '123123'
         ]);
-        $user3->assignRole('Plant manager');
+        $user3->assignRole('Technician');
 
         $user4 = User::create([
             'firstname' => 'ramy',
