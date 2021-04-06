@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Material;
+use App\User;
 use DateTime;
 
 class SandTestResource extends JsonResource
@@ -35,13 +36,16 @@ class SandTestResource extends JsonResource
             $newstatus = "Completed";
         }
         $original = parent::toArray($request);
+        $tested_by = User::where('id', $this->sample->tasks->pluck('technician_id')[0])->first();
         return array_merge($original, [
             'technician_name' => $this->technician['firstname'] . " " . $this->technician['lastname'],
             'test_date' => $this->sample['test_date'],
             'sample_type' => $this->sample['type'],
             'sample_description' => $this->sample['type_description'],
             'test_name' => $this->sample->tasks->pluck('test_name')[0],
-            'status' => $newstatus
+            'status' => $newstatus,
+            'sample' => "",
+            'tested_by' => $tested_by->firstname . " " . $tested_by->lastname
 
         ]);
     }

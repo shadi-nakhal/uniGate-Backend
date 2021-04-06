@@ -39,8 +39,6 @@ class ConcreteResource extends JsonResource
                     $status = "Completed";
                 }
             }
-        } else {
-            $status = "UnAssigned";
         }
 
         $original = parent::toArray($request);

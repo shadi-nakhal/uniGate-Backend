@@ -33,9 +33,4 @@ class Concrete extends Model
     {
         return $this->hasMany(Task::class, 'sample_type', 'type')->where('sample_id', $this->id);
     }
-
-    public function belongtotask()
-    {
-        return $this->belongsToMany(Task::class, 'sample_type', 'type')->where('sample_id', $this->id);
-    }
 }

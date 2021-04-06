@@ -22,6 +22,7 @@ class CreateTasksTable extends Migration
             $table->string('sample_id');
             $table->string('sample_type');
             $table->string('sample_ref');
+            $table->string('test_date');
             $table->boolean('status');
             $table->timestamps();
         });

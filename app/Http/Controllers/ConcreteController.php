@@ -58,7 +58,14 @@ class ConcreteController extends Controller
 
     public function destroy($id)
     {
-        Concrete::where('id', $id)->delete();
-        return Concrete::with('client', 'project', 'technician')->paginate(10);
+        $tasks = Concrete::find($id)->tasks()->get();
+        if (count($tasks) == 0) {
+            Concrete::where('id', $id)->delete();
+            return ConcreteResource::collection(Concrete::paginate(10));
+        } else {
+            return  response()->json([
+                'errors' => ['Cannot delete sample with assigned tasks']
+            ], 400);
+        }
     }
 }

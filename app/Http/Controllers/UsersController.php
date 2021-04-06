@@ -45,6 +45,7 @@ class UsersController extends Controller
 
             $user->image = $filename;
         }
+        $user->removeRole($user->role);
         $user->update($data);
         $user->assignRole($request->role);
         $user->save();
