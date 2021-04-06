@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     protected $fillable = [
-        'test_name', 'test_id', 'technician_name', 'technician_id', 'sample_id', 'sample_type',
-        'sample_ref', 'status', 'test_date',
+        'test_date', 'test_name', 'test_id', 'technician_name', 'technician_id', 'sample_id', 'sample_type',
+        'sample_ref', 'status', 
     ];
-
+    
     public function concrete()
     {
         return $this->hasMany(Concrete::class, 'type', 'sample_type')->where('id', $this->sample_id);

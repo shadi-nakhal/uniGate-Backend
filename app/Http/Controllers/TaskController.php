@@ -31,8 +31,7 @@ class TaskController extends Controller
     {
 
         $data = $request->all();
-        $sample =
-            $task = new Task();
+        $task = new Task();
         $task->fill($data);
         $task->save();
         return response()->json($task);
